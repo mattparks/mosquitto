@@ -152,10 +152,13 @@ endif (WITH_BROKER)
 # Install pkg-config files
 # ========================================
 
-configure_file(libmosquitto.pc.in libmosquitto.pc @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libmosquitto.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-configure_file(libmosquittopp.pc.in libmosquittopp.pc @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libmosquittopp.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+option(MOSQUITTO_INSTALL "Generate installation target" ON)
+if (MOSQUITTO_INSTALL)
+	configure_file(libmosquitto.pc.in libmosquitto.pc @ONLY)
+	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libmosquitto.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+	configure_file(libmosquittopp.pc.in libmosquittopp.pc @ONLY)
+	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libmosquittopp.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+endif (MOSQUITTO_INSTALL)
 
 # ========================================
 # Testing
